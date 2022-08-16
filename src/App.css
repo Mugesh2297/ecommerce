@@ -46,6 +46,24 @@
   text-align: center;
 }
 
-.checked{
-  color:orange;
+.div{
+  
+  background-image: linear-gradient(to right, #DECBA4, #3E5151);
+
+}
+
+.h3{
+  color:white;
+}
+.h6{
+  
+    display: flex;
+    align-items: center;
+  
+}
+
+.nav-item{
+  font-size: 23px;
+  padding-left: 10px;
+  text-align: center;
 }
