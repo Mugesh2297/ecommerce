@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "./card.js";
@@ -8,6 +7,8 @@ import Nav from "./nav.js";
 import Header from "./header.js";
 import Footer from "./footer.js";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { CounterData} from './Context.js';
+
 
 
 function App() {
@@ -54,24 +55,33 @@ function App() {
       id: 6,
       title: "OnePlus 10 Pro",
       price: 55000,
-      url: "https://media.pocketnow.com/styles/large/public/2022-05/DSC00861.JPG?itok=_a7D2rJP",
+      url: "https://static.digit.in/default/c8986073c9ed4d14babe7e0fa941f7ed18f8b0ed.jpeg?tr=w-1200",
       rating: 3,
     }
   ]
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
+  const [initialValue, setValue] = useState(0);
 
   let addToCart = (item) => {
     setCart([...cart, item])
     setTotal(total + item.price)
+    setValue(initialValue+1);
+    console.log(initialValue)
+   
   }
   let removeFromCart = (item) => {
     let index = cart.findIndex((obj) => obj.id === item.id)
     cart.splice(index, 1);
     setCart([...cart]);
     setTotal(total - item.price)
+    setValue(initialValue-1);
+    console.log(initialValue)
+
   }
   return (
+    <CounterData.Provider value={{initialValueFromProvider: initialValue,}}>
+
     <div className="div">
       <Nav></Nav>
       <br />
@@ -84,6 +94,7 @@ function App() {
               {
                 products.map((item) => {
                   return <Card item={item} cartItems={cart} handleAddToCart={addToCart}></Card>
+                  
                 })
               }
 
@@ -110,6 +121,7 @@ function App() {
       </div>
       <Footer></Footer>
     </div>
+    </CounterData.Provider>
   );
 }
 
